@@ -1,0 +1,29 @@
+
+/* Mobile Layout Support */
+@media (max-width: 768px) {
+  .gooey-nav-container nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0;
+  }
+
+  .gooey-nav-container nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Disable gooey effect on mobile if it causes issues, or adjust it */
+  .gooey-nav-container .effect {
+    display: none; /* Hide effect on mobile for simplicity and performance */
+  }
+  
+  .gooey-nav-container nav ul li.active {
+    color: black; /* Black text on white background */
+  }
+
+  /* Ensure the link text color is also black, overriding styles.css */
+  .gooey-nav-container nav ul li.active .nav-link {
+    color: black;
+  }
+}
