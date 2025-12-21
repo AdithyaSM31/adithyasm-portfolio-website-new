@@ -130,10 +130,6 @@ export class DarkVeil {
         // Ensure canvas buffer matches window size
         this.renderer.setSize(width * this.options.resolutionScale, height * this.options.resolutionScale);
         
-        // Force canvas style to match window size to prevent CSS scaling issues
-        this.canvas.style.width = `${width}px`;
-        this.canvas.style.height = `${height}px`;
-
         if (this.program) {
             this.program.uniforms.uResolution.value.set(width, height);
         }
