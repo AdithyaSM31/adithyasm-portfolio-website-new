@@ -125,9 +125,10 @@ export class DarkVeil {
     }
 
     resize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        // Ensure canvas buffer matches window size
+        // Use the canvas's actual display size to ensure buffer matches CSS size
+        const width = this.canvas.clientWidth || window.innerWidth;
+        const height = this.canvas.clientHeight || window.innerHeight;
+        
         this.renderer.setSize(width * this.options.resolutionScale, height * this.options.resolutionScale);
         
         if (this.program) {
