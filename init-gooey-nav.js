@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Scroll Spy Logic
+    let isManualScroll = false;
+    let scrollTimeout;
+
     const observerOptions = {
         root: null,
         rootMargin: '-20% 0px -70% 0px', // Active when section is near the top
@@ -54,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const observer = new IntersectionObserver((entries) => {
+        if (isManualScroll) return; // Skip updates during manual scroll
+
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.id;
@@ -64,6 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
+
+    // Handle manual scroll clicks
+    gooeyContainer.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link) {
+            isManualScroll = true;
+            clearTimeout(scrollTimeout);
+            // Reset flag after scroll animation (approx 1s)
+            scrollTimeout = setTimeout(() => {
+                isManualScroll = false;
+            }, 1000);
+        }
+    });
 
     items.forEach(item => {
         const id = item.href.replace('#', '');
