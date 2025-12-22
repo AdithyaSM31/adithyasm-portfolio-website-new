@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     titleLines.forEach(line => {
         new VariableProximity(line, {
             radius: 150,
-            fromFontVariationSettings: "'wght' 100", // Ultra Thin
-            toFontVariationSettings: "'wght' 1000",  // Ultra Black
+            fromFontVariationSettings: "'wght' 400",
+            toFontVariationSettings: "'wght' 900",
             falloff: 'gaussian'
         });
     });
