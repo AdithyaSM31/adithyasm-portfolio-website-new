@@ -12,7 +12,7 @@
 
 .variable-proximity-letter {
     display: inline-block;
-    transition: font-variation-settings 0.1s linear; /* Smooth out slightly */
+    /* transition removed for instant response */
 }
 
 .sr-only {

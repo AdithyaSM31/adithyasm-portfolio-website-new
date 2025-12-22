@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     titleLines.forEach(line => {
         new VariableProximity(line, {
-            radius: 150, // Increased radius for better visibility
-            fromFontVariationSettings: "'wght' 400", // Start at regular weight
-            toFontVariationSettings: "'wght' 900",   // Go to maximum bold weight
-            falloff: 'gaussian' // Smoother transition
+            radius: 300, // Significantly increased radius for maximum visibility
+            fromFontVariationSettings: "'wght' 400",
+            toFontVariationSettings: "'wght' 900",
+            falloff: 'gaussian'
         });
     });
     
