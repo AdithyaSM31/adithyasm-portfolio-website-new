@@ -196,6 +196,13 @@ export class GooeyNav {
         this.makeParticles(this.filterRef);
     }
 
+    setActive(index) {
+        const lis = this.navRef.querySelectorAll('li');
+        if (index >= 0 && index < lis.length) {
+            this.handleClick(lis[index], index);
+        }
+    }
+
     destroy() {
         this.resizeObserver.disconnect();
     }

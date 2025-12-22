@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.body.appendChild(svgFilter);
 
-    new GooeyNav(gooeyContainer, {
+    const gooeyNav = new GooeyNav(gooeyContainer, {
         items: items,
         particleCount: 15,
         particleDistances: [90, 10],
@@ -46,6 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
         colors: [1, 2, 3, 4] // Using CSS variable indices
     });
     
+    // Scroll Spy Logic
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Active when section is near the top
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                const index = items.findIndex(item => item.href === `#${id}`);
+                if (index !== -1) {
+                    gooeyNav.setActive(index);
+                }
+            }
+        });
+    }, observerOptions);
+
+    items.forEach(item => {
+        const id = item.href.replace('#', '');
+        const section = document.getElementById(id);
+        if (section) {
+            observer.observe(section);
+        }
+    });
+
     console.log('GooeyNav initialized');
     // Re-initialize hamburger menu logic since we replaced the DOM
     if (typeof window.initHamburgerMenu === 'function') {
