@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     titleLines.forEach(line => {
         new VariableProximity(line, {
-            radius: 300, // Significantly increased radius for maximum visibility
-            fromFontVariationSettings: "'wght' 400",
-            toFontVariationSettings: "'wght' 900",
+            radius: 150,
+            fromFontVariationSettings: "'wght' 100", // Ultra Thin
+            toFontVariationSettings: "'wght' 1000",  // Ultra Black
             falloff: 'gaussian'
         });
     });
