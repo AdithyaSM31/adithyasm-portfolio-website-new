@@ -629,6 +629,58 @@ function forceShowSkills() {
     });
 }
 
+// 3D Card Init
+function init3DCard() {
+    const card = document.querySelector('.card-3d');
+    if (!card) return;
+
+    const inner = card.querySelector('.card-3d__inner');
+    const layers = Array.from(card.querySelectorAll('.card-3d__layer'));
+
+    const bounds = card.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+
+    function handleMove(e) {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        const rotateX = (-y * 12).toFixed(2);
+        const rotateY = (x * 12).toFixed(2);
+
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+
+        layers.forEach(layer => {
+            const z = parseFloat(layer.dataset.z || 0);
+            const tx = x * (z / 20);
+            const ty = y * (z / 30);
+            layer.style.transform = `translateX(${ -50 + tx }%) translateY(${20 + ty}px) translateZ(${z}px)`;
+        });
+
+        // Shine
+        const shine = card.querySelector('.card-3d__shine');
+        if (shine) {
+            const px = (x + 0.5) * 100;
+            const py = (y + 0.5) * 100;
+            shine.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.12), rgba(255,255,255,0.0) 30%)`;
+        }
+    }
+
+    function reset() {
+        inner.style.transform = '';
+        layers.forEach(layer => layer.style.transform = '');
+        const shine = card.querySelector('.card-3d__shine');
+        if (shine) shine.style.background = '';
+    }
+
+    card.addEventListener('mousemove', handleMove);
+    card.addEventListener('mouseleave', reset);
+    card.addEventListener('focus', () => { card.addEventListener('mousemove', handleMove); });
+    card.addEventListener('blur', reset);
+}
+
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     try {
@@ -648,6 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add some interactive effects
         addInteractiveEffects();
+
+        // Initialize 3D profile card (if present)
+        if (typeof init3DCard === 'function') init3DCard();
         
         // Ensure skills are visible after everything loads
         setTimeout(forceShowSkills, 1000);
