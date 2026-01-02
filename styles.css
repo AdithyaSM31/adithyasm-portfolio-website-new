@@ -1859,15 +1859,15 @@ body {
     text-align: left;
 }
 
-.skill-item.neon-card .neon-card__content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    text-align: left;
-    width: 100%;
+.skill-category.neon-card .neon-card__content {
+    display: block;
+    padding: 2rem;
+}
+
+.skill-category.neon-card {
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .certification-item.neon-card .neon-card__content {
