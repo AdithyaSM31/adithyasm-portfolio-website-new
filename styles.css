@@ -1683,3 +1683,83 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
 }
+
+/* Interactive Hover Button */
+.interactive-hover-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 9999px;
+    cursor: pointer;
+    overflow: hidden;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.interactive-hover-button__content-original {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.interactive-hover-button__dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    position: absolute;
+    left: -16px;
+}
+
+.interactive-hover-button:hover .interactive-hover-button__dot {
+    transform: scale(150);
+}
+
+.interactive-hover-button__text {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.interactive-hover-button:hover .interactive-hover-button__text {
+    transform: translateX(12px);
+    opacity: 0;
+}
+
+.interactive-hover-button__content-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: var(--background-dark);
+    font-weight: 700;
+}
+
+.interactive-hover-button:hover .interactive-hover-button__content-hover {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.interactive-hover-button__icon {
+    font-size: 1.2rem;
+}
