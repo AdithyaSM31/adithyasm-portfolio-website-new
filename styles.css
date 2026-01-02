@@ -875,7 +875,8 @@ body {
 
 .skill-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     align-items: center;
     padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.02);
@@ -888,6 +889,20 @@ body {
     opacity: 1;
     transform: translateX(0);
     min-height: 60px;
+}
+
+.skill-item i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: var(--transition-smooth);
+    min-width: 30px;
+    text-align: center;
+}
+
+.skill-item:hover i {
+    color: var(--accent-color);
+    transform: scale(1.2) rotate(5deg);
+    text-shadow: 0 0 15px var(--accent-color);
 }
 
 .skill-item::before {
@@ -1842,6 +1857,17 @@ body {
     justify-content: flex-start;
     gap: 1.5rem;
     text-align: left;
+}
+
+.skill-item.neon-card .neon-card__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    width: 100%;
 }
 
 .certification-item.neon-card .neon-card__content {
