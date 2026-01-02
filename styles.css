@@ -1889,3 +1889,53 @@ body {
     padding: 1.5rem;
     text-align: left;
 }
+
+/* Icon Cloud Styles */
+.tagcloud-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    z-index: 10;
+    pointer-events: none; /* Allow clicks to pass through to background if needed, but canvas usually captures mouse */
+}
+
+.tagcloud-wrap canvas {
+    pointer-events: auto; /* Re-enable pointer events for the canvas */
+}
+
+#icon-cloud-canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Ensure icons in the hidden list are styled correctly for TagCanvas to read */
+#icon-tags {
+    display: none;
+}
+
+#icon-tags a {
+    color: var(--primary-color);
+    font-size: 16px; /* Base size for text */
+    text-decoration: none;
+}
+
+#icon-tags i {
+    font-size: 40px; /* Size for icons in cloud */
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .tagcloud-wrap {
+        min-height: 300px;
+        position: relative;
+        top: 0;
+        right: 0;
+    }
+}
