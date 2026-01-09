@@ -1792,13 +1792,21 @@ body {
     overflow: visible;
     /* Reset existing stat-item styles that might conflict */
     background: transparent !important;
-    border: none !important;
+    border: 1px solid rgba(0, 212, 255, 0.1);
     padding: 0 !important;
     box-shadow: none !important;
 }
 
 .neon-card:hover {
     transform: translateY(-10px);
+}
+
+.neon-card:hover::before {
+    opacity: 1;
+}
+
+.neon-card:hover::after {
+    opacity: 0.6;
 }
 
 /* Move pseudo-elements to the container */
@@ -1815,11 +1823,12 @@ body {
     background-size: 200% 200%;
     animation: background-position-spin 3s infinite linear alternate;
     z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .neon-card::after {
     filter: blur(20px);
-    opacity: 0.6;
     z-index: -2;
 }
 
