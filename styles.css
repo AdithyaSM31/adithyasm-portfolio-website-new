@@ -1410,6 +1410,17 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* FORCE visibility for GSAP animated elements on mobile */
+    .project-card, 
+    .section-title, 
+    .about-content, 
+    .timeline-item,
+    .skill-item {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+
     /* Mobile Navigation is already defined earlier - no duplicate needed */
     
     /* Fix container padding for mobile */
