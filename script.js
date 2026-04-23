@@ -42,63 +42,82 @@ class AnimationController {
                 ease: 'power2.out'
             }, '-=0.3');
         
-        // Section animations
-        gsap.utils.toArray('.section').forEach((section, index) => {
-            gsap.from(section.querySelector('.section-title'), {
+        let mm = gsap.matchMedia();
+        
+        mm.add("(min-width: 769px)", () => {
+            // Section animations
+            gsap.utils.toArray('.section').forEach((section, index) => {
+                const title = section.querySelector('.section-title');
+                if (title) {
+                    gsap.from(title, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top 80%',
+                            end: 'bottom 20%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+            
+            // About section
+            gsap.from('.about-content', {
                 scrollTrigger: {
-                    trigger: section,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
+                    trigger: '#about',
+                    start: 'top 70%',
                     toggleActions: 'play none none reverse'
                 },
                 y: 50,
                 opacity: 0,
-                duration: 0.8,
+                duration: 1,
                 ease: 'power2.out'
+            });
+            
+            // Project cards
+            gsap.utils.toArray('.project-card').forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+            
+            // Timeline items
+            gsap.utils.toArray('.timeline-item').forEach((item, index) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    x: index % 2 === 0 ? -50 : 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                });
             });
         });
         
-        // About section
-        gsap.from('.about-content', {
-            scrollTrigger: {
-                trigger: '#about',
-                start: 'top 70%',
-                toggleActions: 'play none none reverse'
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: 'power2.out'
-        });
-        
-        // Project cards
-        gsap.utils.toArray('.project-card').forEach((card, index) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.6,
-                delay: index * 0.1,
-                ease: 'power2.out'
-            });
-        });
-        
-        // Timeline items
-        gsap.utils.toArray('.timeline-item').forEach((item, index) => {
-            gsap.from(item, {
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                x: index % 2 === 0 ? -50 : 50,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power2.out'
+        // Mobile fallback to ensure visibility
+        mm.add("(max-width: 768px)", () => {
+            const elements = document.querySelectorAll('.section-title, .about-content, .project-card, .timeline-item');
+            elements.forEach(el => {
+                if (el) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                    gsap.set(el, { clearProps: "all" });
+                }
             });
         });
     }
