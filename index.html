@@ -1061,12 +1061,7 @@
                 el.style.opacity = '1';
                 el.style.visibility = 'visible';
                 el.style.transform = 'none';
-                el.style.display = 'block';
             });
-            
-            // Specific layout fixes
-            const grids = document.querySelectorAll('.projects-grid, .about-content, .hero-content');
-            grids.forEach(function(g) { g.style.display = 'grid'; });
         }, 3000);
 
         // Also try to remove on DOMContentLoaded
