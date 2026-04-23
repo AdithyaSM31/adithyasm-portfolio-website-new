@@ -1410,7 +1410,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* FORCE visibility for GSAP animated elements on mobile */
+    /* FORCE visibility for GSAP and Observer animated elements on mobile */
+    .section,
+    .glass-section,
+    .container,
     .project-card, 
     .section-title, 
     .about-content, 
@@ -1419,6 +1422,15 @@ body {
         opacity: 1 !important;
         transform: none !important;
         visibility: visible !important;
+        display: block !important; /* Ensure they aren't accidentally display: none */
+    }
+
+    /* Exceptions for specific layouts */
+    .projects-grid, .about-content, .hero-content {
+        display: grid !important;
+    }
+    .hero-buttons, .footer-content, .nav-container {
+        display: flex !important;
     }
 
     /* Mobile Navigation is already defined earlier - no duplicate needed */

@@ -60,16 +60,26 @@ function initFallbackAnimations() {
     
     // Observe sections
     document.querySelectorAll('.section').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(50px)';
+        if (window.innerWidth > 768) {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+        } else {
+            section.style.opacity = '1';
+            section.style.transform = 'none';
+        }
         section.style.transition = 'all 0.8s ease';
         observer.observe(section);
     });
     
     // Observe project cards
     document.querySelectorAll('.project-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
+        if (window.innerWidth > 768) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+        } else {
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+        }
         card.style.transition = 'all 0.6s ease';
         observer.observe(card);
     });
@@ -155,8 +165,13 @@ function initFallbackSkillBars() {
     
     skillItems.forEach(item => {
         // Set initial state for animation
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-30px)';
+        if (window.innerWidth > 768) {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+        } else {
+            item.style.opacity = '1';
+            item.style.transform = 'none';
+        }
         observer.observe(item);
     });
     

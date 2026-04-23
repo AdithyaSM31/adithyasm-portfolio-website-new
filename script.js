@@ -111,11 +111,12 @@ class AnimationController {
         
         // Mobile fallback to ensure visibility
         mm.add("(max-width: 768px)", () => {
-            const elements = document.querySelectorAll('.section-title, .about-content, .project-card, .timeline-item');
+            const elements = document.querySelectorAll('.section, .glass-section, .container, .section-title, .about-content, .project-card, .timeline-item');
             elements.forEach(el => {
                 if (el) {
                     el.style.opacity = '1';
                     el.style.transform = 'none';
+                    el.style.visibility = 'visible';
                     gsap.set(el, { clearProps: "all" });
                 }
             });
