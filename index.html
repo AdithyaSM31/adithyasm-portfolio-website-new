@@ -33,13 +33,14 @@
 
 <body>
     <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loading-content">
-            <div class="rocket-loader">🚀</div>
-            <div class="loading-text">Launching portfolio.exe</div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
+    <div id="loading-screen" class="new-preloader">
+        <div class="preloader-text">loading your experience.</div>
+        <div class="preloader-columns">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
         </div>
     </div>
 
@@ -1324,56 +1325,24 @@
 
     <!-- Emergency loading screen removal for Vercel deployment -->
     <script>
-        console.log('Emergency loading script started');
+        console.log('Emergency fallback script initialized');
 
-        // Function to hide loading screen
-        function hideLoadingScreen() {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                console.log('Hiding loading screen');
-                loadingScreen.style.opacity = '0';
-                loadingScreen.style.visibility = 'hidden';
-                setTimeout(function () {
-                    loadingScreen.style.display = 'none';
-                    console.log('Loading screen completely hidden');
-                }, 500);
-            }
-        }
-
-        // Force remove loading screen after 2 seconds maximum
+        // Force remove loading screen after 4 seconds maximum if GSAP failed
         setTimeout(function () {
-            console.log('Emergency timeout: removing loading screen and forcing visibility');
-            hideLoadingScreen();
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen && loadingScreen.style.display !== 'none') {
+                console.log('Emergency timeout: forcing loading screen hidden');
+                loadingScreen.style.display = 'none';
 
-            // ULTIMATE EMERGENCY FIX: Force all sections and cards visible
-            const emergencyElements = document.querySelectorAll('.section, .project-card, .skill-item, .timeline-item, .section-title');
-            emergencyElements.forEach(function (el) {
-                el.style.opacity = '1';
-                el.style.visibility = 'visible';
-                el.style.transform = 'none';
-            });
-        }, 3000);
-
-        // Also try to remove on DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM loaded: attempting to remove loading screen');
-            setTimeout(hideLoadingScreen, 800);
-        });
-
-        // Remove on window load
-        window.addEventListener('load', function () {
-            console.log('Window loaded: removing loading screen');
-            hideLoadingScreen();
-        });
-
-        // Immediate check if document is already ready
-        if (document.readyState === 'complete') {
-            console.log('Document already complete, hiding loading screen immediately');
-            hideLoadingScreen();
-        } else if (document.readyState === 'interactive') {
-            console.log('Document interactive, hiding loading screen');
-            setTimeout(hideLoadingScreen, 100);
-        }
+                // ULTIMATE EMERGENCY FIX: Force all sections and cards visible
+                const emergencyElements = document.querySelectorAll('.section, .project-card, .skill-item, .timeline-item, .section-title');
+                emergencyElements.forEach(function (el) {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                    el.style.transform = 'none';
+                });
+            }
+        }, 4000);
     </script>
 
     <!-- Ensure page starts from home section on reload -->

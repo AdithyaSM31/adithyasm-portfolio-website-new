@@ -49,18 +49,40 @@ body {
 }
 
 /* Loading Screen */
-#loading-screen {
+.new-preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: var(--gradient-space);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
     z-index: 10000;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    pointer-events: none;
+    display: flex;
+}
+
+.preloader-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    z-index: 10001;
+    font-family: var(--font-display);
+    text-align: center;
+}
+
+.preloader-columns {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.preloader-columns .col {
+    flex: 1;
+    height: 100%;
+    background-color: #a89fdb;
 }
 
 /* 3D Card - Profile */
@@ -177,54 +199,7 @@ body {
     .card-3d__layer--actions { top: 250px; }
 }
 
-#loading-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loading-content {
-    text-align: center;
-    color: var(--text-primary);
-}
-
-.rocket-loader {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-    animation: rocketFloat 2s ease-in-out infinite;
-}
-
-.loading-text {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--primary-color);
-}
-
-.loading-bar {
-    width: 300px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.loading-progress {
-    height: 100%;
-    background: var(--gradient-primary);
-    border-radius: 2px;
-    animation: loadingProgress 3s ease-in-out;
-}
-
-@keyframes rocketFloat {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-}
-
-@keyframes loadingProgress {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
+/* Old loading screen styles removed */
 
 /* Three.js Canvas */
 #space-canvas {

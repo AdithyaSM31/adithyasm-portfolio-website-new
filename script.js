@@ -125,51 +125,35 @@ class AnimationController {
     
     initLoadingAnimation() {
         const loadingScreen = document.getElementById('loading-screen');
-        const progressBar = document.querySelector('.loading-progress');
+        const cols = document.querySelectorAll('.preloader-columns .col');
+        const text = document.querySelector('.preloader-text');
         
-        if (!loadingScreen || !progressBar) {
+        if (!loadingScreen || !cols.length) {
             console.warn('Loading elements not found');
             return;
         }
         
-        console.log('Starting loading animation');
+        console.log('Starting staggered loading animation');
         
-        // Function to hide loading screen
-        const hideLoadingScreen = () => {
-            if (loadingScreen && loadingScreen.style.display !== 'none') {
-                console.log('Hiding loading screen via animation');
-                loadingScreen.style.opacity = '0';
-                loadingScreen.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                    loadingScreen.classList.add('hidden');
-                    console.log('Loading screen hidden');
-                }, 500);
-            }
-        };
-        
-        // Simulate loading progress
-        let progress = 0;
-        const loadingInterval = setInterval(() => {
-            progress += Math.random() * 20 + 10; // Faster progress
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(loadingInterval);
-                
-                // Hide loading screen after completion
-                setTimeout(hideLoadingScreen, 300);
-            }
-            if (progressBar) {
-                progressBar.style.width = progress + '%';
-            }
-        }, 80); // Faster interval
-        
-        // Fallback: hide loading screen after 3 seconds regardless
+        const tl = gsap.timeline();
+
+        // Simulate a tiny loading delay, then animate
         setTimeout(() => {
-            console.log('Loading timeout - forcing hide');
-            clearInterval(loadingInterval);
-            hideLoadingScreen();
-        }, 3000);
+            tl.to(text, {
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.inOut"
+            })
+            .to(cols, {
+                yPercent: -100,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power4.inOut"
+            }, "-=0.1")
+            .set(loadingScreen, {
+                display: "none"
+            });
+        }, 800);
     }
     
     initNavigation() {
